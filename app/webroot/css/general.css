@@ -1,0 +1,69 @@
+#container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.main-container {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(229, 221, 221);
+}
+
+/* Header styles */
+header {
+    color: #fff; /* Header text color */
+    padding: 10px 20px; /* Add padding to the header */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Align items with space between */
+    align-items: center; /* Center items vertically */
+}
+
+/* Header buttons styles */
+.header-buttons {
+    display: flex; /* Use flexbox for layout */
+}
+
+.header-buttons .button {
+    margin-left: 10px; /* Add spacing between buttons */
+    padding: 8px 12px; /* Add padding to buttons */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    text-decoration: none; /* Remove default link underline */
+    border-radius: 5px; /* Add rounded corners to buttons */
+}
+
+.header-buttons .button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+}
+
+/* Navbar CSS */
+#navbar {
+    background-color: #333; /* Set background color */
+    overflow: hidden; /* Clear floats */
+}
+
+#navbar ul {
+    list-style-type: none; /* Remove bullet points */
+    margin: 0;
+    padding: 0;
+}
+
+#navbar li {
+    float: left; /* Float the list items horizontally */
+}
+
+#navbar li a {
+    display: block;
+    color: white; /* Set text color */
+    text-align: center;
+    padding: 14px 16px; /* Add padding */
+    text-decoration: none; /* Remove underlines */
+}
+
+#navbar li a:hover {
+    background-color: #111; /* Darken background color on hover */
+}

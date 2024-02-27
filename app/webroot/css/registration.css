@@ -1,0 +1,26 @@
+@charset "utf-8";
+/**
+ * Generic CSS for Registration
+ */
+
+ .registration-container {
+    width: 450px; /* Adjust width as needed */
+    margin: 20px auto; /* Center the container horizontally */
+    text-align: center; /* Center text inside the container */
+    padding: 20px; /* Add padding to create space inside the card */
+    border-radius: 10px; /* Add rounded corners to create a card-like appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(0, 0, 0, 0.2); /* Add shadow to create depth */
+    background-color: #ffffff; /* Set background color */
+}
+
+/* Float input labels to the left */
+.registration-container label {
+    float: left;
+    clear: left; /* Clear floats to start a new line for each label */
+    text-align: right; /* Align labels to the right for better readability */
+    margin-right: 10px; /* Add some margin between labels and input fields */
+}
+
+.registration-container h2 {
+    color: black; /* Change the color to black */
+}

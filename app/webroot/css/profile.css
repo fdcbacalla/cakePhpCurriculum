@@ -1,0 +1,53 @@
+@charset "utf-8";
+/**
+ * Generic CSS for Profile
+ */
+
+ .profile-container {
+    position: relative; /* Set position to relative */
+    width: 600px; /* Adjust width as needed */
+    margin: 20px auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding to create space inside the container */
+    border-radius: 10px; /* Add rounded corners to create a card-like appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(0, 0, 0, 0.2); /* Add shadow to create depth */
+    background-color: #ffffff; /* Set background color */
+    overflow: hidden; /* Clear floats */
+}
+
+.profile-header {
+    position: absolute; /* Position the header absolutely */
+    top: 10px; /* Adjust top position as needed */
+    right: 10px; /* Adjust right position as needed */
+}
+
+.edit-button {
+    background-color: #007bff; /* Set button background color */
+    color: #ffffff; /* Set button text color */
+    border: none; /* Remove button border */
+    padding: 5px 10px; /* Add padding to button */
+    border-radius: 5px; /* Add rounded corners to button */
+    cursor: pointer; /* Set cursor to pointer */
+}
+
+.profile-picture {
+    float: left; /* Float the picture to the left */
+    margin-right: 20px; /* Add some margin between the picture and details */
+}
+
+.profile-picture img {
+    width: 180px; /* Set the width of the image */
+    height: 180px; /* Set the height of the image */
+    border: 2px solid #007bff; /* Add a border around the image */
+    border-radius: 10px; /* Add rounded corners to the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to create depth */
+}
+
+.profile-details {
+    float: left; /* Float the details to the left */
+    width: 50%; /* Set the width to occupy half of the container */
+}
+
+.profile-hobby {
+    clear: both; /* Clear the floats */
+    margin-top: 20px; /* Add some space between the details and hobby */
+}

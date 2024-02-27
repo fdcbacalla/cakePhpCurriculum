@@ -1,0 +1,35 @@
+/* Custom CSS for the "Thank you for registering" card */
+.card {
+    width: 450px; /* Adjust width as needed */
+    margin: 20px auto; /* Center the container horizontally */
+    text-align: center; /* Center text inside the container */
+    padding: 20px; /* Add padding to create space inside the card */
+    border-radius: 10px; /* Add rounded corners to create a card-like appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(0, 0, 0, 0.1); /* Add shadow to create depth */
+    background-color: #ffffff; /* Set background color */
+}
+
+.card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

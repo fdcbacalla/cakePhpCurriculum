@@ -1,0 +1,119 @@
+/* Your CSS styles here */
+.chat-container {
+    width: 500px;
+    height: 70%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column-reverse; /* Reverse the order of flex items */
+    background-color: white;
+}
+
+.chat-label {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 500px;
+    max-height: 900px;
+    margin: 0 auto;
+    overflow-y: auto;
+    padding: 10px;
+    color: #fff;
+    background-color: #007bff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    width: fit-content;
+    max-width: 50%;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.sender-message {
+    text-align: right;
+    background-color: #007bff;
+    color: #fff;
+    margin-left: auto;
+}
+
+.receiver-message {
+    display: flex;
+    align-items: flex-end;
+    color: #000;
+    margin-right: auto;
+    max-width: 60%;
+    padding: 10px 10px 0px 0px;
+}
+
+.profile-picture {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 50%;
+}
+
+.message-content {
+    flex: 1; /* Fill remaining space in flex container */
+    padding: 10px; /* Adjust padding */
+    border-radius: 20px; /* Retain border radius */
+}
+
+.receiver-message .message-content {
+    background-color: #b9b3b3;
+}
+
+.message-time {
+    font-size: 12px;
+    color: #888;
+    position: absolute;
+    bottom: -20px;
+    right: 5px;
+}
+
+.receiver-message .message-time {
+    font-size: 12px;
+    color: #888;
+    right: unset;
+    left: 10px;
+}
+
+.message-input {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    max-height: 10vh;
+    width: 500px;
+    margin: 0 auto;
+    padding: 10px;
+    color: #fff;
+    background-color: #007bff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.message-input input {
+    flex: 1;
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    height: 35px;
+    box-sizing: border-box;
+}
+
+.message-input button {
+    padding: 10px 20px;
+    background-color: #074d97;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    height: 35px;
+}

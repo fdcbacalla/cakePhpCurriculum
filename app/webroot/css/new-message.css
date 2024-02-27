@@ -1,0 +1,73 @@
+@charset "utf-8";
+/**
+ * Generic CSS for New Message
+ */
+
+.main-container {
+    margin: 0 auto;
+}
+.new-message-container {
+    width: 600px; /* Match width with message-container */
+    margin: 20px auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding to create space inside the container */
+    border-radius: 10px; /* Add rounded corners to create a card-like appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(0, 0, 0, 0.2); /* Add shadow to create depth */
+    background-color: #ffffff; /* Set background color */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px; /* Add padding to match button */
+    border: 1px solid #ccc; /* Add border to match button */
+    border-radius: 5px; /* Add border-radius to match button */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+h2 {
+    float:left;
+}
+
+/* Add styles for the Go Back button */
+.go-back-button {
+    float:right;
+}
+
+.go-back-button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+.select2-results__options {
+    color: black;
+}
+
+.select2-selection__rendered {
+    line-height: 31px !important;
+}
+.select2-container .select2-selection--single {
+    height: 35px !important;
+}
+.select2-selection__arrow {
+    height: 34px !important;
+}
+

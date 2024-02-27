@@ -1,0 +1,91 @@
+@charset "utf-8";
+/**
+ * Generic CSS for Message List
+ */
+
+ .main-container {
+    margin: 0 auto;
+}
+
+.new-message-button {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end; /* Align items to the end of the container */
+}
+
+.new-message-button button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.message-container {
+    position: relative; /* Set position to relative */
+    width: 600px; /* Adjust width as needed */
+    margin: 20px auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding to create space inside the container */
+    border-radius: 10px; /* Add rounded corners to create a card-like appearance */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), inset 0 0 0 2px rgba(0, 0, 0, 0.2); /* Add shadow to create depth */
+    background-color: #ffffff; /* Set background color */
+    overflow: hidden; /* Clear floats */
+}
+
+.message-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff; /* Set default background color */
+    text-decoration: none; /* Remove underline */
+}
+
+.message-item .name,
+.message-item .latest-message,
+.message-item .date {
+    text-decoration: none; /* Remove underline */
+}
+
+.message-item.unread {
+    background-color: #e6f7ff; /* Set background color for unread messages */
+}
+
+.message-item:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+.profile-picture img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 50%;
+}
+
+.message-content {
+    margin-left: 10px;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.latest-message {
+    color: #666;
+    margin-top: 5px;
+}
+
+.date {
+    color: #999;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.unread-indicator {
+    width: 10px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border-radius: 50%; /* Create a circle */
+    background-color: #ff0000; /* Set color for unread indicator */
+    margin-left: auto; /* Push the indicator to the right */
+    margin-top: 20px; /* Adjust vertical alignment */
+}
