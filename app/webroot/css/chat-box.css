@@ -76,11 +76,13 @@
     right: 5px;
 }
 
-.receiver-message .message-time {
+.message-time-receiver {
     font-size: 12px;
     color: #888;
     right: unset;
-    left: 10px;
+    padding-left: 10px;
+    margin-bottom: 5px; /* Add margin for spacing */
+    margin-right: 10px; /* Add margin for spacing */
 }
 
 .message-input {
@@ -116,4 +118,25 @@
     cursor: pointer;
     margin-left: 10px;
     height: 35px;
+}
+
+/* CSS for loading indicator */
+.loading-here {
+    display: none; /* Initially hidden */
+    text-align: center;
+}
+
+.loading-spinner {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

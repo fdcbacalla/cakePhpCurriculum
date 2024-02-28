@@ -21,6 +21,7 @@
  App::uses('AppController', 'Controller');
  App::uses('Message', 'Model');
  App::uses('User', 'Model');
+ App::uses('PaginatorComponent', 'Controller/Component');
 
 /**
  * Static content controller
@@ -36,7 +37,7 @@ class MessagesController extends AppController {
  *
  * @var array
  */
-public $uses = array('Message', 'User'); // Load the Message model
+public $uses = array('Message', 'User', 'Paginator'); // Load the Message model
 
 /**
  * Displays a view
@@ -116,8 +117,7 @@ public $uses = array('Message', 'User'); // Load the Message model
         }
     }
 
-    public function chatbox($chatterId = null)
-    {
+    public function chatbox($chatterId = null) {
         if (!$chatterId) {
             return $this->redirect(array('controller' => 'messages', 'action' => 'index'));
         }
@@ -146,8 +146,33 @@ public $uses = array('Message', 'User'); // Load the Message model
         $this->set(compact('messageList', 'chatter'));
     }
 
-    private function messages($userId, $chatterId)
-    {
+    public function ajaxMessages() {
+        $this->autoRender = false; // Disable view rendering
+        // Check if it's an Ajax request
+        if ($this->request->is('ajax')) {
+            // Handle Ajax request data
+            $page = $this->request->data['pageNumber'];
+            $chatterId = $this->request->data['chatter'];
+            $currentUserId = $this->Auth->user('id');
+
+            $messageList = $this->messages($currentUserId, $chatterId, $page);
+
+            // Process data and prepare response
+            $response = array('status' => 'success', 'message' => 'Data received successfully.', 'messageList' => $messageList);
+
+            // Convert response to JSON and output
+            echo json_encode($response);
+        } else {
+            // Handle non-Ajax requests
+            // Redirect or display an error message
+        }
+    }
+
+    private function messages($userId, $chatterId, $page = 1, $limit = 10) {
+        // Calculate the offset based on the page number and limit
+        $offset = ($page - 1) * $limit;
+
+        // Find messages with offset and limit
         $messageList = $this->Message->find('all', array(
             'fields' => array(
                 'id',
@@ -164,10 +189,17 @@ public $uses = array('Message', 'User'); // Load the Message model
                 ),
             ),
             'order' => array('Message.id DESC'), // Ordering by id in descending order
-            'limit' => 10, // Retrieve the last 10 messages
+            'limit' => $limit, // Limit the number of results per page
+            'offset' => $offset, // Offset based on the page number
             'recursive' => -1 // Disable recursive fetching
-        ));        
+        ));
 
-        return $messageList;
+        // Restructure the array with message_id as the key
+        $formattedMessageList = array();
+        foreach ($messageList as $message) {
+            $formattedMessageList[$message['Message']['id']] = $message['Message'];
+        }
+
+        return $formattedMessageList;
     }
 }
