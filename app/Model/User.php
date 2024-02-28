@@ -22,6 +22,7 @@
 App::uses('AppModel', 'Model');
 
 class User extends AppModel {
+    public $recursive = -1;
 
     // In your model (e.g., User model)
     public function __construct($id = false, $table = null, $ds = null) {

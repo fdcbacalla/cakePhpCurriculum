@@ -17,15 +17,19 @@ $this->assign('css', $this->Html->css('chat-box'));
     <div class="chat-container" ng-app="myApp" ng-controller="myCtrl">
         <!-- Reverse the order of messages using orderBy -->
         <div ng-repeat="value in message | orderBy: 'Message.created': true">
-            <div class="chat-message sender-message" ng-show="value.Message.sender_id == chatter.id">
-                <div class="message-content">{{ value.Message.message }}</div>
-                <div class="message-time">{{ value.Message.created_human }}</div>
+            <div ng-show="value.Message.sender_id == chatter.id">
+                <div class="chat-message sender-message">
+                    <div class="message-content">{{ value.Message.message }}</div>
+                    <div class="message-time">{{ value.Message.created_human }}</div>
+                </div>
             </div>
-            <div class="chat-message receiver-message" ng-show="value.Message.sender_id != chatter.id">
-                <!-- Profile picture image goes here -->
-                <img src="/img/default_avatar.png" class="profile-picture" alt="Profile Picture">
-                <div class="message-content">{{ value.Message.message }}</div>
-                <div class="message-time">{{ value.Message.created_human }}</div>
+            <div ng-show="value.Message.sender_id != chatter.id">
+                <div class="chat-message receiver-message">
+                    <!-- Profile picture image goes here -->
+                    <img src="/img/default_avatar.png" class="profile-picture" alt="Profile Picture">
+                    <div class="message-content">{{ value.Message.message }}</div>
+                </div>
+                <div class="message-time-receiver">{{ value.Message.created_human }}</div>
             </div>
         </div>
     </div>
