@@ -54,8 +54,42 @@ $this->start('script');
 
         // Assuming chatContainer is the DOM element representing the chat container
         var chatContainer = document.querySelector('.chat-container');
-        console.log(chatContainer);
         chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        // Function to fetch messages from the server
+        function fetchMessages(page) {
+            // $.ajax({
+            //     url: '/fetch-messages',
+            //     method: 'GET',
+            //     data: { page: page },
+            //     success: function(response) {
+            //         appendMessages(response.messages);
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error('Error fetching messages:', error);
+            //     }
+            // });
+
+            console.log('Scroll');
+        }
+
+        // Function to append messages to the chat container
+        function appendMessages(messages) {
+            // Append each message to the chat container
+            messages.forEach(function(message) {
+                // Append message HTML to the chat container
+                $('.chat-container').append('<div class="chat-message">' + message.text + '</div>');
+            });
+        }
+
+        // Event listener for scroll events on the chat container
+        $('.chat-container').on('scroll', function() {
+            // Check if the user has scrolled to the bottom of the container
+            if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                // Fetch the next page of messages
+                fetchMessages(nextPage);
+            }
+        });
     </script>
 <?php
 $this->end();
