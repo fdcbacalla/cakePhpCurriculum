@@ -62,11 +62,24 @@
     border: 1px solid #555;
 }
 
+/* Add ellipsis to truncate long messages */
 .message-content {
     flex: 1;
-    padding: 10px; 
-    border-radius: 20px; 
+    padding: 10px;
+    border-radius: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /* Set a maximum width to prevent the message from expanding too much */
+    max-width: 200px; /* Adjust as needed */
 }
+
+/* Expand the message on hover */
+.message-content.expand {
+    max-width: none; /* Remove the maximum width */
+    white-space: normal; /* Allow wrapping */
+}
+
 
 .receiver-message .message-content {
     background-color: #b9b3b3;

@@ -22,7 +22,7 @@ $this->assign('css', $this->Html->css('chat-box'));
             <div ng-repeat="value in message | orderObjectByIndex">
                 <div ng-show="value.sender_id != chatter.id">
                     <div class="chat-message sender-message" ng-mouseenter="showDeleteButton = true" ng-mouseleave="showDeleteButton = false">
-                        <div class="message-content">{{ value.message }}</div>
+                    <div class="message-content" ng-class="{ 'expand': isHovered }" ng-mouseenter="isHovered = true" ng-mouseleave="isHovered = false">{{ value.message }}</div>
                         <div class="delete-button" ng-show="showDeleteButton">
                             <button ng-click="deleteMessage(value.id)">Delete</button>
                         </div>
@@ -34,7 +34,7 @@ $this->assign('css', $this->Html->css('chat-box'));
                 <div ng-show="value.sender_id == chatter.id">
                     <div class="chat-message receiver-message">
                         <img src="{{ chatter.avatar }}" class="profile-picture" alt="Profile Picture">
-                        <div class="message-content">{{ value.message }}</div>
+                        <div class="message-content" ng-class="{ 'expand': isHovered }" ng-mouseenter="isHovered = true" ng-mouseleave="isHovered = false">{{ value.message }}</div>
                     </div>
                     <div class="message-time-receiver">
                         <div>{{ value.created_human }}</div>
