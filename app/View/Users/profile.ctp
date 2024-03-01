@@ -28,5 +28,11 @@ $this->assign('css', $this->Html->css('profile'));
 			<p>Date Joined: <?php echo CakeTime::format($user['created'], '%B %d, %Y, %I:%M %p'); ?></p>
 			<p>Last Login: <?php echo CakeTime::format($user['last_login'], '%B %d, %Y, %I:%M %p'); ?> <br> <?php echo $timeHelper->timeAgoInWords($user['last_login'])?></p>
 		</div>
+		<div class="profile-hobby">
+			<h2>Hobby</h2>
+			<p>
+				<?php echo $user['hobby'] ? $user['hobby'] : "Hobby not written yet."; ?>
+			</p>
+		</div>
 	</div>
 </div>
