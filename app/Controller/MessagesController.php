@@ -209,16 +209,56 @@ public $uses = array('Message', 'User', 'Paginator'); // Load the Message model
         }
     }
 
+    public function delete() {
+        $this->autoRender = false; // Disable rendering of view
+    
+        // Check if it's a POST request and if message ID is provided
+        if ($this->request->is('ajax') && isset($this->request->data['messageId'])) {
+            $messageId = $this->request->data['messageId'];
+    
+            // Assuming you have a Message model with a soft delete behavior
+            $message = $this->Message->id = $messageId;
+            // If message exists, update deleted_at timestamp
+            if ($message) {
+                $this->Message->id = $messageId;
+                if ($this->Message->saveField('deleted_at', date('Y-m-d H:i:s'))) {
+                    // Message soft-deleted successfully
+                    $this->response->statusCode(200); // Set HTTP status code
+                    $this->response->body(json_encode(['message' => 'Message soft-deleted successfully']));
+                } else {
+                    // Error soft-deleting message
+                    $this->response->statusCode(500); // Set HTTP status code
+                    $this->response->body(json_encode(['error' => 'Error soft-deleting message']));
+                }
+            } else {
+                // Message not found
+                $this->response->statusCode(404); // Set HTTP status code
+                $this->response->body(json_encode(['error' => 'Message not found']));
+            }
+        } else {
+            // Invalid request
+            $this->response->statusCode(400); // Set HTTP status code
+            $this->response->body(json_encode(['error' => 'Invalid request']));
+        }
+    
+        // Send response
+        $this->response->type('json'); // Set response content type
+        return $this->response;
+    }
+
     private function messages($userId, $chatterId, $page = 1, $limit = 10, $searchTerm = null) {
         // Calculate the offset based on the page number and limit
         $offset = ($page - 1) * $limit;
     
         // Define conditions for the search query
         $conditions = array(
-            'OR' => array(
-                array('Message.sender_id' => $userId, 'Message.recipient_id' => $chatterId),
-                array('Message.recipient_id' => $userId, 'Message.sender_id' => $chatterId)
-            ),
+            'AND' => array(
+                'OR' => array(
+                    array('Message.sender_id' => $userId, 'Message.recipient_id' => $chatterId),
+                    array('Message.recipient_id' => $userId, 'Message.sender_id' => $chatterId)
+                ),
+                'Message.deleted_at IS NULL' // Condition to check if deleted_at is null
+            )
         );
     
         // Add search condition if search term is provided
@@ -250,5 +290,5 @@ public $uses = array('Message', 'User', 'Paginator'); // Load the Message model
         }
     
         return $formattedMessageList;
-    }    
+    }
 }

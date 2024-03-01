@@ -63,9 +63,18 @@ class User extends AppModel {
                 'message' => 'Password is required'
             )
         ),
+        'new_password' => array(
+            'allowEmpty' => array(
+                'rule' => 'allowEmpty',
+                'required' => false,
+                'last' => true,
+                'on' => 'update' // Apply this rule only during update operations
+            ),
+            // Add other validation rules as needed
+        ),
         'confirm_password' => array(
             'required' => array(
-                'rule' => 'notBlank',
+                'rule' => array('confirmPasswordRequired'),
                 'message' => 'Confirm Password is required'
             ),
             'match' => array(
@@ -97,7 +106,7 @@ class User extends AppModel {
                 'message' => 'Please upload a valid image (jpg, jpeg, png, gif).'
             )
         )
-    );
+    );    
 
     public $hasMany = array(
         'SentMessage' => array(
@@ -112,7 +121,7 @@ class User extends AppModel {
 
     // Custom validation method to compare passwords
     public function comparePasswords($data) {
-        return $data['confirm_password'] === $this->data[$this->alias]['password'];
+        return $data['confirm_password'] == $this->data[$this->alias]['new_password'] ?? $this->data[$this->alias]['password'];
     }
 
     public function beforeSave($options = array()) {
@@ -134,5 +143,46 @@ class User extends AppModel {
             // If picture is not empty, return the URL to the user's picture
             return $picture;
         }
+    }
+
+    /**
+     * Custom validation method to compare two fields (e.g., new_password and confirm_password)
+     */
+    public function compareFields($field, $otherField) {
+        // $field contains the value of the current field being validated
+        // $otherField contains the value of the field to compare against
+
+        return $field === $this->data[$this->alias][$otherField];
+    }
+
+    public function confirmPasswordRequired($check) {
+        $data = $this->data['User'];
+        if (!empty($data['new_password'])) {
+            return !empty($check['confirm_password']);
+        }
+        return true; // Confirm password is not required if new password is not provided
+    }
+
+    // Custom validation rule to check uniqueness of email excluding the current user's email
+    public function isUniqueEmail($email, $userId) {
+        $conditions = array(
+            'User.email' => $email,
+            'NOT' => array('User.id' => $userId) // Exclude the current user's ID
+        );
+        return !$this->find('count', array('conditions' => $conditions));
+    }
+
+    // Function to calculate age
+    public function getAge($birthdate) {
+        // Convert birthdate string to DateTime object
+        $birthdate = new DateTime($birthdate);
+        
+        // Get current date
+        $currentDate = new DateTime();
+        
+        // Calculate difference between current date and birthdate
+        $age = $birthdate->diff($currentDate)->y; // Extract years from the difference
+        
+        return $age;
     }
 }

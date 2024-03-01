@@ -20,8 +20,15 @@
  */
 
 App::uses('AppModel', 'Model');
+App::uses('SoftDeleteBehavior', 'Model/Behavior');
 
 class Message extends AppModel {
+    // Soft delete behavior
+    public $actsAs = array('SoftDelete');
+    
+    // Define soft delete field
+    public $softDeleteField = 'deleted_at';
+
     public $validate = array(
         'message' => array(
             'required' => array(

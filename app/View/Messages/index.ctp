@@ -33,37 +33,5 @@ $this->assign('css', $this->Html->css('message'));
 				</div>
 			</a>
 		<?php endforeach; ?>
-        <div class="message-item">
-			<div class="profile-picture">
-				<!-- Profile picture of the second party -->
-				<img src="/img/default_avatar.png" alt="Profile Picture">
-			</div>
-			<div class="message-content">
-				<!-- Name/Username of the second party (optional) -->
-				<div class="name">Jane Smith</div>
-				<!-- Latest chat message -->
-				<div class="latest-message">Hi there! How's it going?</div>
-				<!-- Date/Time of the latest message -->
-				<div class="date">Feb 17, 2024</div>
-			</div>
-		</div>
-
-		<div class="message-item">
-			<div class="profile-picture">
-				<!-- Profile picture of the second party -->
-				<img src="/img/default_avatar.png" alt="Profile Picture">
-			</div>
-			<div class="message-content">
-				<!-- Name/Username of the second party (optional) -->
-				<div class="name">John Doe</div>
-				<!-- Latest chat message -->
-				<div class="latest-message">Hey, how are you?</div>
-				<!-- Date/Time of the latest message -->
-				<div class="date">Feb 18, 2024</div>
-			</div>
-			<!-- Unread indicator -->
-			<div class="unread-indicator"></div>
-			 
-		</div>
     </div>
 </div>

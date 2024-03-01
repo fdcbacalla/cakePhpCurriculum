@@ -1,6 +1,6 @@
 // A $( document ).ready() block.
 $( document ).ready(function() {
-    alert("Hello Madafaka");
+    alert("Hello Bradder");
     var year = new Date().getFullYear();
 
     $(".datepicker").datepicker({

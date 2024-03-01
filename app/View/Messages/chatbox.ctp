@@ -19,21 +19,26 @@ $this->assign('css', $this->Html->css('chat-box'));
             <button class="settings-button toggle-settings">&#9881;</button>
         </div>
         <div class="chat-container">
-            <!-- Reverse the order of messages using orderBy -->
             <div ng-repeat="value in message | orderObjectByIndex">
                 <div ng-show="value.sender_id != chatter.id">
-                    <div class="chat-message sender-message">
+                    <div class="chat-message sender-message" ng-mouseenter="showDeleteButton = true" ng-mouseleave="showDeleteButton = false">
                         <div class="message-content">{{ value.message }}</div>
+                        <div class="delete-button" ng-show="showDeleteButton">
+                            <button ng-click="deleteMessage(value.id)">Delete</button>
+                        </div>
                     </div>
-                    <div class="message-time-sender">{{ value.created_human }}</div>
+                    <div class="message-time-sender">
+                        <div>{{ value.created_human }}</div>
+                    </div>
                 </div>
                 <div ng-show="value.sender_id == chatter.id">
                     <div class="chat-message receiver-message">
-                        <!-- Profile picture image goes here -->
                         <img src="{{ chatter.avatar }}" class="profile-picture" alt="Profile Picture">
                         <div class="message-content">{{ value.message }}</div>
                     </div>
-                    <div class="message-time-receiver">{{ value.created_human }}</div>
+                    <div class="message-time-receiver">
+                        <div>{{ value.created_human }}</div>
+                    </div>
                 </div>
             </div>
             <div class="loading-here">
@@ -102,6 +107,7 @@ $this->start('script');
             $scope.messageText = null;
             $scope.searchMessageText = null;
             $scope.showSettingsPanel = false;
+            $scope.showDeleteButton = false; // Initialize to false
             latest = getHighestIndex($scope.message);
             console.log(getHighestIndex($scope.message));
 
@@ -286,6 +292,25 @@ $this->start('script');
 
             $scope.toggleSettingsPanel = function() {
                 $scope.showSettingsPanel = !$scope.showSettingsPanel;
+            };
+
+            $scope.deleteMessage = function(messageId) {
+                console.log(messageId);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/messages/delete', // Endpoint URL for deleting messages
+                    data: { messageId: messageId }, // Data to send with the request
+                    success: function(response) {
+                        delete $scope.message[messageId];
+                        console.log('Message deleted successfully');
+                        // You can also remove the message from the UI here if needed
+                    },
+                    error: function(xhr, status, error) {
+                        // Error callback
+                        console.error('Error deleting message:', error);
+                    }
+                });
             };
         });
 

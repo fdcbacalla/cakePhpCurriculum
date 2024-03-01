@@ -79,6 +79,12 @@ public $uses = array('User');
 		$timeHelper = new TimeHelper(new View());
 		$user = $this->User->findById($this->Auth->user()['id'])['User'];
 		$profilePicture = empty($user['picture']) ? '/img/default_avatar.png' : '/uploads/' . $user['picture'];
+		$user['age'] = null;
+
+		if($user['birthdate']) { 
+			$user['age'] = $age = $this->User->getAge($user['birthdate']);
+		}
+
 		$this->set(compact('user', 'profilePicture', 'timeHelper'));
 	}
 
@@ -139,7 +145,68 @@ public $uses = array('User');
 				$this->Flash->error('Validation failed. Please check your input.');
 			}
 		}
-	}		
+	}
+	
+	public function update() {
+		$user = $this->User->findById($this->Auth->user()['id'])['User'];
+
+		$this->set(compact('user'));
+
+		if ($this->request->is('post')) {
+			$userId = $this->Auth->user('id'); // Get logged-in user ID
+			$currentUser = $this->User->findById($userId);
+	
+			// Retrieve submitted data from the form
+			$postData = $this->request->data;
+
+			if (empty($postData['User']['new_password'])) {
+				unset($postData['User']['new_password']);
+				unset($postData['User']['confirm_password']);
+			}
+
+			if($postData['User']['email'] == $currentUser['User']['email']) {
+				unset($postData['User']['email']);
+			}
+
+			// Validate the form data
+			$this->User->set($postData);
+			if ($this->User->validates()) {
+				// Check if old password matches the user's current password
+				$oldPassword = $postData['User']['old_password'];
+	
+				if (!empty($oldPassword) && password_verify($oldPassword, $currentUser['User']['password'])) {
+					// Old password matches, proceed with updating email and password
+	
+					// Set the ID of the user to update
+					$postData['User']['id'] = $userId;
+	
+					// Update email if it's provided
+					if (!empty($postData['User']['email'])) {
+						$this->User->id = $userId;
+						$this->User->saveField('email', $postData['User']['email']);
+					}
+	
+					// Update password if it's provided and confirm password matches
+					$newPassword = $postData['User']['new_password'] ?? null;
+					if (!empty($newPassword)) {
+						$this->User->id = $userId;
+						$this->User->saveField('password', $newPassword);
+					}
+	
+					// Redirect the user to a success page or render a success view
+					$this->Flash->success('Profile updated successfully.');
+					return $this->redirect(array('action' => 'profile'));
+				} else {
+					// Old password doesn't match
+					$this->Flash->error('Old password is incorrect.');
+				}
+			} else {
+				// Validation failed
+				$this->Flash->error('Validation failed. Please check your input.');
+			}
+		}
+	}
+
 	
 	private function resizePicture($fullPath, $fileName, $destination, $maxWidth, $maxHeight) {
 		list($width, $height) = getimagesize($fullPath);
