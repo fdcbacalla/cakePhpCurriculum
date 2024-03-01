@@ -10,7 +10,6 @@ if (!Configure::read('debug')):
 endif;
 
 $this->assign('css', $this->Html->css('profile'));
-$this->assign('script', $this->Html->script('profile_edit'));
 ?>
 
 <div class="profile-container">
